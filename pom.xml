@@ -23,7 +23,7 @@
     <modules>
         <module>service-email</module>
         <module>service-log</module>
-        <module>service-frauddetectservice</module>
+        <module>service-fraud-detect-service</module>
         <module>service-new-order</module>
         <module>common-kafka</module>
     </modules>
