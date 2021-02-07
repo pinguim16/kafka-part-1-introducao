@@ -150,7 +150,7 @@ RabbitMq;
 Sendo que cada uma possui as suas caracteristicas especificas.
 
 
-
+<!---
 O que aprendemos nessa aula:
 
 O que são produtores
@@ -187,3 +187,4 @@ como criar módulos
 como manter tudo em um mono repo
 como gerenciar dependências entre módulos
 como gerar os binários de cada módulo
+-->
