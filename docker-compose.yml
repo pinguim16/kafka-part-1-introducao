@@ -8,7 +8,6 @@ services:
       ZOOKEEPER_SERVER_ID: 1
       ZOOKEEPER_CLIENT_PORT: "2181"
       ZOOKEEPER_TICK_TIME: "2000"
-      ZOOKERPER_SERVERS: "zookeeper:22888:23888"
     ports:
     - "2181:2181"
   kafka1:
@@ -27,7 +26,6 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_DELETE_TOPIC_ENABLE: "true"
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
-      #KAFKA_SCHEMA_REGISTRY_URL: "schemaregistry:8085"
       KAFKA_JMX_PORT: 9991
 
 
