@@ -206,8 +206,49 @@ do tópico para segurança caso o broker caia e tenha outro de backup, o consumi
 para o backup não havendo perda de mensagens. Nosso caso só utilizamos por ter somente um broker.
 * KAFKA_DELETE_TOPIC_ENABLE: habilita a remoção de tópicos;
 * KAFKA_AUTO_CREATE_TOPICS_ENABLE: habilita a criação de tópicos;
-  
 
+Para simularmos um ambiente de micro-services de compras geramos varios modulos dentro do projeto, 
+sendo que common-kafka se tornou compartilhado entre todas para termos reutilização de código entre todos.
+O service-new-order responsável por postar (producer) as mensagens nas filas e os 
+service-fraud-detect-service, service-email e service-log são responsáveis pela leitura das mensagens
+(consumers);
+
+Dentro do commons temos a classe KafkaDispatcher que é nossa classe responsável por conectar no Kafka e 
+enviar as mensagens para fila.
+
+      private static Properties properties() {
+        var properties = new Properties();
+        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:29092");
+        properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, GsonSerializer.class.getName());
+        return properties;
+    }
+
+
+ProducerConfig.BOOTSTRAP_SERVERS_CONFIG: configuração para conexão da nossa aplicação no java, a porta
+normalmente é 9092 caso instale diretamente em sua máquina local sem usar containers. Os poderia 
+mudar o nosso parametro de ports que estão sendo externelizadas no docker-compose.
+ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG: classe responsavel por serializar na nossa chave 
+que está sendo enviada com o objeto da mensagem.
+ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG: classe responsavel por serializar na nosso objeto
+que está sendo enviado.
+
+No metodo abaixo send, enviamos o topico ao qual queremos postar a mensagem, caso o tópico não exista
+já é criado de forma automatica. Como o metodo send do producer precisa de uma chamada de callback para 
+o caso de falha, criamos um básico apenas para envia-lo como parametro e imprimir a excessão para 
+invertigarmos a causa.
+  
+     void send(String topico, String key, T value) throws ExecutionException, InterruptedException {
+        var record = new ProducerRecord<>(topico, key, value);
+        Callback callback = (data, ex) -> {
+            if (ex != null) {
+                ex.printStackTrace();
+                return;
+            }
+            System.out.println("Sucesso enviado - " + data.topic() + "::: patition - " + data.partition() + "/offset - " + data.offset() + "/timestamp :" + data.timestamp());
+        };
+        producer.send(record, callback).get();
+    }
 
 
 
