@@ -59,13 +59,13 @@ onde toda nova informação é adicionada no final do arquivo. Esse é o princí
 
 * Processamento de stream: processamento imediato de um fluxo de mensagens (data streaming).
 
-<img src="src/main/resources/img/img1.png" alt="Coesão" width="800" style="text-align:center;"/> \
+<img src="src/main/resources/img/img1.png" alt="Coesão" width="400" style="text-align:center;"/> \
 *Pattern publish/subscrive* 
 
 
 O Kafka é um intermediário que trabalha coletando informações e armazenando para os consumidores.
 
-<img src="src/main/resources/img/img2.png" alt="Coesão" width="800" style="text-align:center;"/>
+<img src="src/main/resources/img/img2.png" alt="Coesão" width="400" style="text-align:center;"/>
 
 O kafka vem sendo adotado para processos ETL(Extract Transform and Load), de forma a copiar os dados 
 de uma banco de dados tradicional (OLTP) para um analítico (OLAP).
