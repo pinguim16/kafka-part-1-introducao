@@ -11,6 +11,8 @@ com entrega/captura dos dados para processamento.
 E nesse ponto que começamos a adentrar no data streaming.
 
 ![Imagem8](src/main/resources/img/img8.png)
+
+<img src="src/main/resources/img/img8.png" alt="Coesão" width="400" />
 *Exemplo de comunicação de sistema*
 
 ## Data Streaming
