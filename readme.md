@@ -10,8 +10,6 @@ recebendo estímulos para processar essas informações e não precisam se preoc
 com entrega/captura dos dados para processamento.
 E nesse ponto que começamos a adentrar no data streaming.
 
-![Imagem8](src/main/resources/img/img8.png)
-
 <img src="src/main/resources/img/img8.png" alt="Coesão" width="800" style="text-align:center;"/>
 *Exemplo de comunicação de sistema*
 
@@ -28,7 +26,7 @@ bancário, imobiliário, industrial e até mesmo para migração de grandes base
 
 ## Mas afinal, o que é Kafka?
 
-![Imagem9](src/main/resources/img/img9.png) 
+<img src="src/main/resources/img/img9.png" alt="Coesão" width="800" style="text-align:center;"/>
 
 O Apache Kafka foi um sistema desenvolvido pelo Linkedin para streaming de dados.
 Originalmente foi criado para ser um sistema baseado em logs e teve até os seguintes nomes:
@@ -61,12 +59,13 @@ onde toda nova informação é adicionada no final do arquivo. Esse é o princí
 
 * Processamento de stream: processamento imediato de um fluxo de mensagens (data streaming).
 
-![Imagem1](src/main/resources/img/img1.png) \
+<img src="src/main/resources/img/img1.png" alt="Coesão" width="800" style="text-align:center;"/> \
 *Pattern publish/subscrive* 
 
 
 O Kafka é um intermediário que trabalha coletando informações e armazenando para os consumidores.
-![Imagem2](src/main/resources/img/img2.png)
+
+<img src="src/main/resources/img/img2.png" alt="Coesão" width="800" style="text-align:center;"/>
 
 O kafka vem sendo adotado para processos ETL(Extract Transform and Load), de forma a copiar os dados 
 de uma banco de dados tradicional (OLTP) para um analítico (OLAP).
@@ -93,14 +92,14 @@ uma fila especifica que a armazena para entregar ao consumidor ou até a mensage
 (Dependendo da configuração de armazenamento da mensagem, a mesma pode ficar eternamente na fila). 
 Caso essa fila possua mais de um consumidor apenas um a receberá.
 
-![Imagem3](src/main/resources/img/img3.png)
+<img src="src/main/resources/img/img3.png" alt="Coesão" width="800" style="text-align:center;"/>
 
 O modelo do publish/subscribe a troca de mensagens acontece pelo modelo de tópicos e as mensagens
 são enviadas para os consumidores que assinaram o tópico.
 Ao contrário do point-to-point esse modelo permite que envie a mesma mensagem para vários
 consumidores.
 
-![Imagem4](src/main/resources/img/img4.png)
+<img src="src/main/resources/img/img4.png" alt="Coesão" width="800" style="text-align:center;"/>
 
 
 O Apache Kafka trabalha com o publish/subscribe, pois a solução tem baixa latência 
@@ -120,7 +119,7 @@ sempre disponível caso um nó caia.
 Arquitetura do Kafka é composta por producers, consumers e o seu cluster.
 Atualmente Netflix, Spotify, Uber, Linkedin e Twitter estão utilizando nas suas plataformas. 
 
-![Imagem5](src/main/resources/img/img5.png)
+<img src="src/main/resources/img/img5.png" alt="Coesão" width="800" style="text-align:center;"/>
 
 O producer é qualquer aplicação que publica uma mensagem no Kafka. O consumer é qualquer aplicação que
 consume as mensagens do kafka. Já o cluster é conjunto de nós (brokers kafka) que funcionam 
@@ -136,7 +135,7 @@ Para gerenciar os brokers de Kafka temos o Zookeeper que armazena todos os metad
 partições, nomes tópicos e os nós disponíveis, além de manter a sincronização entre os clusters.
 Em caso de queda de algum cluster o Zookeeper elege o próximo cluster que irá substituir.
 
-![Imagem7](src/main/resources/img/img7.png)
+<img src="src/main/resources/img/img7.png" alt="Coesão" width="800" style="text-align:center;"/>
 
 ### Acesso Sequencial ao Disco
 *O Kafka trabalha com gravação e leitura sequencial no disco para garantir que não há perda de dados,
