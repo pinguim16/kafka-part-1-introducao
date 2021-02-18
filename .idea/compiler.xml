@@ -11,6 +11,7 @@
         <module name="common-kafka" />
         <module name="service-new-order" />
         <module name="service-email" />
+        <module name="service-frauddetectservice" />
       </profile>
     </annotationProcessing>
   </component>
