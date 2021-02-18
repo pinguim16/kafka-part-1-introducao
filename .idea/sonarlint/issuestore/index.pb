@@ -9,17 +9,3 @@ B
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 9
 	readme.md,2\7\275d783e298228506068436512433d343feb52aa
-e
-5src/main/java/br/com/test/ecommerce/EmailService.java,3\4\347c81b9846f9803c48cc2af4541786a6f8a232d
-i
-9src/main/java/br/com/test/ecommerce/ConsumerFunction.java,3\9\39813c62f62a63c4f317f7716450bcc98d38ecbf
-^
-.src/main/java/br/com/test/ecommerce/Email.java,9\d\9deddcbfaa810804b413c64e51f8f7e19b09ad51
-i
-9src/main/java/br/com/test/ecommerce/GsonDeserializer.java,4\0\40c31904dfa294e9bffa8c47ead5b9544175da5c
-g
-7src/main/java/br/com/test/ecommerce/GsonSerializer.java,c\e\ce32c58bff032a22b9407fc8fa8b0230633fb093
-e
-5src/main/java/br/com/test/ecommerce/KafkaService.java,8\8\8871cf42e56a75e7ab6f590f367ba1da94cbe944
-h
-8src/main/java/br/com/test/ecommerce/KafkaDispatcher.java,5\6\56d5a69f56e906b66fde2fd12b51e3510ab14dfa

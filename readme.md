@@ -153,8 +153,8 @@ Sendo que cada uma possui as suas características especificas.
 
 
 # Hands on
-Agora que já apresentamos os principais conceitos do Kafka, vamos por a mão na massa, começando pelo nosso 
-Docker compose que será responsável por subir nosso cluster.
+Agora que já apresentamos os principais conceitos do Kafka, vamos por a mão na massa.
+Começando pelo nosso Docker compose que será responsável por subir o nosso cluster.
 
 Utilizamos as imagens do Confluentinc por serem mais estáveis e confiáveis, configuração básica do
 zookeeper:
@@ -169,9 +169,8 @@ zookeeper:
         ports:
         - "2181:2181"
 
-* ZOOKEEPER_SERVER_ID: isso é necessário apenas ao executar no modo de cluster. 
-  Define a ID do servidor no id, que consiste numa única linha que contém 
-  apenas o texto da ID da máquina. Por exemplo, o id servidor 1 conteria apenas o texto “1“. 
+* ZOOKEEPER_SERVER_ID: isso é necessário apenas ao executar no modo de cluster, 
+  definindo o ID do servidor. Por exemplo, o id servidor 1 conteria apenas o texto “1“. 
   O ID deve ser exclusivo dentro do conjunto e deve ter um valor entre 1 e 255.
 * ZOOKEEPER_CLIENT_PORT : informa a porta ao qual os clientes do Kafka irão escutar.
 * ZOOKEEPER_TICK_TIME : unidade de tempo utilizada pelo zookeeper para validações.
@@ -194,11 +193,11 @@ zookeeper:
           KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
 
 * KAFKA_ZOOKEEPER_CONNECT: porta ao qual o Kafka irá se conectar ao zookeeper;
-* KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: define chave/valor para protocolo de segurança a ser usado, 
+* KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: define chave/valor para o protocolo de segurança a ser usado, 
   por nome de listerner;
 * KAFKA_INTER_BROKER_LISTENER_NAME: define qual listener usar para comunicação entre brokers. 
-Os brokers comunicam-se entre si,geralmente usando uma rede interna(rede docker como nosso case).
-* KAFKA_ADVERTISED_LISTENERS :  lista de listeners com host/ip. São esses os metadados que serão
+Os brokers comunicam-se entre si, geralmente usando uma rede interna(rede docker como o nosso case).
+* KAFKA_ADVERTISED_LISTENERS : lista de listeners com host/ip. São esses os metadados que serão
 devolvidos para clientes.
 * KAFKA_BROKER_ID: identificação do broker kafka.
 * KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: essa configuração define configuração do fator de replicação
@@ -207,8 +206,8 @@ para o backup não havendo perda de mensagens. Nosso caso só utilizamos por ter
 * KAFKA_DELETE_TOPIC_ENABLE: habilita a remoção de tópicos;
 * KAFKA_AUTO_CREATE_TOPICS_ENABLE: habilita a criação de tópicos;
 
-Para simularmos um ambiente de micro-services de compras geramos varios modulos dentro do projeto, 
-sendo que common-kafka se tornou compartilhado entre todas para termos reutilização de código entre todos.
+Para simularmos um ambiente de micro-services de compras geramos vários módulos dentro do projeto, 
+sendo que common-kafka se tornou compartilhado entre todos para termos reutilização de código.
 O service-new-order responsável por postar (producer) as mensagens nas filas e os 
 service-fraud-detect-service, service-email e service-log são responsáveis pela leitura das mensagens
 (consumers);
@@ -225,18 +224,19 @@ enviar as mensagens para fila.
     }
 
 
-ProducerConfig.BOOTSTRAP_SERVERS_CONFIG: configuração para conexão da nossa aplicação no java, a porta
-normalmente é 9092 caso instale diretamente em sua máquina local sem usar containers. Os poderia 
-mudar o nosso parametro de ports que estão sendo externelizadas no docker-compose.
-ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG: classe responsavel por serializar na nossa chave 
+ProducerConfig.BOOTSTRAP_SERVERS_CONFIG: configuração para conexão da nossa aplicação no java. A porta
+normalmente é 9092 caso instale diretamente na sua máquina local sem usar containers. Poderíamos 
+mudar o nosso parâmetro de ports que esta sendo externalizadas no docker-compose, mas resolvemos deixar
+como na documentação. 
+ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG: classe responsável por serializar na nossa chave 
 que está sendo enviada com o objeto da mensagem.
-ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG: classe responsavel por serializar na nosso objeto
+ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG: classe responsável por serializar o nosso objeto
 que está sendo enviado.
 
-No metodo abaixo send, enviamos o topico ao qual queremos postar a mensagem, caso o tópico não exista
-já é criado de forma automatica. Como o metodo send do producer precisa de uma chamada de callback para 
-o caso de falha, criamos um básico apenas para envia-lo como parametro e imprimir a excessão para 
-invertigarmos a causa.
+No método abaixo send, enviamos o tópico ao qual queremos postar a mensagem, caso o tópico não exista
+já é criado de forma automática. Como o método send do producer precisa de uma chamada de callback para 
+o caso de falha, criamos um básico apenas para enviá-lo como parâmetro e imprimir a excessão para
+investigarmos a causa.
   
      void send(String topico, String key, T value) throws ExecutionException, InterruptedException {
         var record = new ProducerRecord<>(topico, key, value);
@@ -251,40 +251,32 @@ invertigarmos a causa.
     }
 
 
+Criamos uma abstração para reaproveitar o código nos consumers, onde instanciamos o KafkaService
+enviando os parâmetros necessários para consumo da fila. 
 
-<!---
-O que aprendemos nessa aula:
+    private Properties getProperties(Class<T> type, String groudId, Map<String, String> overrideProperties) {
+        var properties = new Properties();
+        properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "127.0.0.1:29092");
+        properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
+        properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, GsonDeserializer.class.getName());
+        properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, groudId);
+        properties.setProperty(ConsumerConfig.CLIENT_ID_CONFIG, UUID.randomUUID().toString());
+        properties.setProperty(ConsumerConfig.MAX_POLL_RECORDS_CONFIG,"1");
+        properties.setProperty(GsonDeserializer.TYPE_CONFIG, type.getName());
+        properties.putAll(overrideProperties);
 
-Criação de tópicos manualmente
-Como instalar e rodar o Kafka
+        return properties;
+    }
 
-
-Como rodar diversos consumidores no mesmo grupo
-Como paralelizar tarefas
-A importância da chave para hash - A chave defini em qual partição o kafka irá postar a mensagem
-Cuidado com poll longo
-
-
-O que aprendemos nessa aula:
-
-A importância de evitar copy e paste
-Criando nossa camada de abstração
-Criando nosso Dispatcher
-Criando nosso Service
+Além dos parâmetros normais para conexão do consumer na fila como explicado anteriormente, aplicamos
+também:
+ConsumerConfig.MAX_POLL_RECORDS_CONFIG: a cada poll do tópico retornará apenas 1 registro.
 
 
-Como limpar os diretórios de log e dados do zookeeper e kafka
-Como utilizar diretórios não temporátios para o zookeeper e kafka
-Como utilizar o GSON
-Criando um serializador customizado do Kafka
-Verificar o conteúdo exato de uma mensagem em um programa
-Deserialização customizada
-Lidando com customização por serviço
+## Agradecimentos
+Para averiguar o funcionamento basta executar o nosso docker-compose e executar cada módulo separadamente.
+Obrigado por ler até aqui, terminamos assim nossa primeira parte, a Introdução do Kafka.
 
-O que aprendemos nessa aula:
 
-como criar módulos
-como manter tudo em um mono repo
-como gerenciar dependências entre módulos
-como gerar os binários de cada módulo
--->
+
+
