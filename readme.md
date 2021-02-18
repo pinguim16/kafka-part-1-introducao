@@ -271,11 +271,11 @@ enviando os parâmetros necessários para consumo da fila.
 
 Além dos parâmetros normais para conexão do consumer na fila como explicado anteriormente, aplicamos
 também:
-ConsumerConfig.MAX_POLL_RECORDS_CONFIG: a cada poll do tópico retornará apenas 1 registro.
+* ConsumerConfig.MAX_POLL_RECORDS_CONFIG: a cada poll do tópico retornará apenas 1 registro.
 
 
 ## Agradecimentos
-Para averiguar o funcionamento basta executar o nosso docker-compose e executar cada módulo separadamente.
+Para averiguar o funcionamento basta executar o nosso docker-compose e executar cada módulo separadamente. /
 Obrigado por ler até aqui, terminamos assim nossa primeira parte, a Introdução do Kafka.
 
 
