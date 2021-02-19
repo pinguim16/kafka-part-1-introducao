@@ -40,7 +40,8 @@ o processamento entre aplicações ou apenas processar de forma assíncrona.</p>
 
 <img src="src/main/resources/img/img9.png" alt="Coesão" width="800" style="text-align:center;"/>
 
-<p>O Apache Kafka foi um sistema desenvolvido pelo Linkedin para streaming de dados.</p>
+<p>O Apache Kafka foi um sistema desenvolvido pelo Linkedin para streaming de dados. E atualmente Netflix, 
+Spotify, Uber, Twitter e o próprio Linkedin estão utilizando nas suas plataformas para auxiliar no processamento de informaçöes.</p> 
 <p>Originalmente foi criado para ser um sistema baseado em logs e teve até os seguintes nomes:
 write-ahead logs, commit logs ou até mesmo transaction logs.</p> 
 <p>Para auxiliar no entendimento dessa prática, explicitamos abaixo o funcionamento das técnicas:</p>
@@ -100,13 +101,13 @@ No kafka, temos as seguintes arquiteturas de mensageiria:
 * Point-to-point.
 
 O modelo point-to-point é baseado em conceito de filas, onde o produtor envia a mensagem para 
-uma fila especifica que a armazena para entregar ao consumidor ou até a mensagem expirar
+uma fila especifica, que a armazena para entregar ao consumidor ou até a mensagem expirar
 (Dependendo da configuração de armazenamento da mensagem, a mesma pode ficar eternamente na fila). 
 Caso essa fila possua mais de um consumidor apenas um a receberá.
 
 <img src="src/main/resources/img/img3.png" alt="kafka" width="800" style="text-align:center;"/>
 
-O modelo do publish/subscribe a troca de mensagens acontece pelo modelo de tópicos e as mensagens
+O modelo do publish/subscribe se baseia na troca de mensagens utilizando o modelo de tópicos, onde as mensagens
 são enviadas para os consumidores que assinaram o tópico.
 Ao contrário do point-to-point esse modelo permite que envie a mesma mensagem para vários
 consumidores.
@@ -114,45 +115,44 @@ consumidores.
 <img src="src/main/resources/img/img4.png" alt="kafka" width="800" style="text-align:center;"/>
 
 
-O Apache Kafka trabalha com o publish/subscribe, pois a solução tem baixa latência 
-para receber e enviar as mensagens. 
+<p>O Apache Kafka trabalha com o publish/subscribe, pois a solução tem baixa latência 
+para receber e enviar as mensagens. </p>
 Além do pattern, a arquitetura ainda possui as seguintes características:
 
 - Escalabilidade: o cluster do Kafka permite o redimensionamento para atender a demanda de maneira simples;
 - Distribuído: o cluster pode operar com vários nós (brokers) para facilitar o processamento;
 - Replicado, particionado e ordenado: as mensagens podem ser replicados na ordem que chegam para 
-facilitar processamento, segurança e até mesmo na velocidade de entrega.
+facilitar processamento, segurança e auxiliar na velocidade de entrega.
 - Alta disponibilidade: o cluster tem diversos nós (brokers) e várias cópias tornando-o
-sempre disponível caso um nó caia.
+sempre disponível caso um nó esteja indisponível.
   
  
 # Arquitetura Apache Kafka
 
-Arquitetura do Kafka é composta por producers, consumers e o seu cluster.
-Atualmente Netflix, Spotify, Uber, Linkedin e Twitter estão utilizando nas suas plataformas. 
+<p>Arquitetura do Kafka é composta por producers, consumers e o seu cluster.</p>
 
 <img src="src/main/resources/img/img5.png" alt="kafka" width="800" style="text-align:center;"/>
 
-O producer é qualquer aplicação que publica uma mensagem no Kafka. O consumer é qualquer aplicação que
+<p>O producer é qualquer aplicação que publica uma mensagem no Kafka. O consumer é qualquer aplicação que
 consume as mensagens do kafka. Já o cluster é conjunto de nós (brokers kafka) que funcionam 
-como única instância de serviço de mensageria.
+como única instância de serviço da mensageria.</p>
 
-Um cluster Kafka possui vários brokers. Um broker ou nó é um servidor kafka que recebe a mensagem dos produtores 
-e armazena as mensagens em disco com uma chave exclusiva de offset. Um broker do Kafka permite que os consumidores
-busquem a mensagem por tópico, consumer group, partição e offset. Brokers fazem parte
-de um cluster compartilhando informações entre si direta ou indiretamente,
-sendo que um dos brokers atua como controlador(controller).
+<p>Um cluster Kafka possui vários brokers. Um broker ou nó é um servidor kafka que recebe as mensagens dos produtores 
+e as armazena em disco com uma chave exclusiva de offset.</p> 
+<p>Um broker do Kafka permite que os consumidores busquem a mensagem por tópico, group id, partição e offset. </p>
+Brokers fazem parte de um cluster compartilhando informações entre si direta ou indiretamente,
+sendo que um dos brokers atua como controlador(controller).</p>
 
-Para gerenciar os brokers de Kafka temos o Zookeeper que armazena todos os metadados dos cluster,
-partições, nomes tópicos e os nós disponíveis, além de manter a sincronização entre os clusters.
-Em caso de queda de algum cluster o Zookeeper elege o próximo cluster que irá substituir.
+<p>Para gerenciar os brokers do Kafka temos o Zookeeper que armazena todos os metadados dos cluster,
+partições, nomes tópicos e os nós disponíveis, além de manter a sincronização entre os clusters.</p>
+<p>Em caso de queda de algum cluster o Zookeeper elege o próximo cluster que irá substituir.</p>
 
 <img src="src/main/resources/img/img7.png" alt="kafka" width="800" style="text-align:center;"/>
 
 ### Acesso Sequencial ao Disco
 *O Kafka trabalha com gravação e leitura sequencial no disco para garantir que não há perda de dados,
-caso acontece algum desligamento acidental da máquina. Esse acesso permite que o Kafka saiba onde 
-começa e termina cada bloco de mensagens.*
+caso aconteça algum desligamento acidental da máquina. Esse acesso permite que o Kafka saiba onde 
+começa e onde termina cada bloco de mensagens.*
 
  
 # Ferramentas semelhantes
