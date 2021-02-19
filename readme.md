@@ -157,19 +157,19 @@ começa e onde termina cada bloco de mensagens.*
  
 # Ferramentas semelhantes
 
-Existe outras ferramentas similares ao Kafka, como :
+<p>Existe outras ferramentas similares ao Kafka, como :</p>
 
 * ActiveMq;
 * RabbitMq.
 
-Sendo que cada uma possui as suas características especificas.
+<p>Sendo que cada uma possui as suas características especificas.</p>
 
 
 # Hands on
-Agora que já apresentamos os principais conceitos do Kafka, vamos por a mão na massa.
-Começando pelo nosso docker compose que será responsável por subir o nosso cluster.
+<p>Agora que já apresentamos os principais conceitos do Kafka, vamos por a mão na massa.</p>
+<p>Começando pelo nosso docker compose que será responsável por subir o nosso cluster.</p>
 
-Utilizamos as imagens do confluentinc por serem mais estáveis e confiáveis, abaixo apresentamos a configuração básica do zookeeper:
+<p>Utilizamos as imagens do confluentinc por serem mais estáveis e confiáveis, abaixo apresentamos a configuração básica do zookeeper:</p>
 
        zookeeper:
         image: confluentinc/cp-zookeeper:5.1.2
@@ -218,14 +218,14 @@ para o backup não havendo perda de mensagens. Nosso caso setamos o valor como 1
 * KAFKA_DELETE_TOPIC_ENABLE: habilita a remoção de tópicos;
 * KAFKA_AUTO_CREATE_TOPICS_ENABLE: habilita a criação automatica de tópicos;
 
-Para simularmos um ambiente de micro-services de compras geramos vários módulos dentro do projeto, 
-sendo que common-kafka se tornou compartilhado entre todos para reutilização do código.
-O service-new-order responsável por postar (producer) as mensagens nas filas e os 
+<p>Para simularmos um ambiente de micro-services de compras geramos vários módulos dentro do projeto, 
+sendo que common-kafka se tornou compartilhado entre todos para reutilização do código.</p>
+<p>O service-new-order responsável por postar (producer) as mensagens nas filas e os 
 service-fraud-detect-service, service-email e service-log são responsáveis pela leitura das mensagens
-(consumers);
+(consumers).</p>
 
-Dentro do commons temos a classe KafkaDispatcher que é nossa classe responsável por conectar no Kafka e 
-enviar as mensagens para fila. Abaixo as propriedades que utilizamos para conectar no kafka:
+<p>Dentro do commons temos a classe KafkaDispatcher que é nossa classe responsável por conectar no Kafka e 
+enviar as mensagens para fila. Abaixo as propriedades que utilizamos para conectar no kafka:</p>
 
       private static Properties properties() {
         var properties = new Properties();
@@ -245,10 +245,10 @@ que está sendo enviada com o objeto da mensagem.
 * ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG: classe responsável por serializar o nosso objeto
 que está sendo enviado.
 
-No método abaixo send, enviamos o tópico ao qual queremos postar a mensagem, caso o tópico não exista
+<p>No método abaixo send, enviamos o tópico ao qual queremos postar a mensagem, caso o tópico não exista
 já é criado de forma automática. Como o método send do producer precisa de uma chamada de callback para 
 o caso de falha, criamos um básico apenas para enviá-lo como parâmetro e imprimir a excessão para
-investigarmos a causa de alguma possível exceção.
+investigarmos a causa de alguma possível exceção. </p>
   
      void send(String topico, String key, T value) throws ExecutionException, InterruptedException {
         var record = new ProducerRecord<>(topico, key, value);
@@ -263,8 +263,8 @@ investigarmos a causa de alguma possível exceção.
     }
 
 
-Criamos uma abstração para reaproveitar o código nos consumers, onde instanciamos o KafkaService
-enviando os parâmetros necessários para consumo da fila. 
+<p>Criamos uma abstração para reaproveitar o código nos consumers, onde instanciamos o KafkaService
+enviando os parâmetros necessários para consumo da fila. </p>
 
     private Properties getProperties(Class<T> type, String groudId, Map<String, String> overrideProperties) {
         var properties = new Properties();
@@ -280,17 +280,17 @@ enviando os parâmetros necessários para consumo da fila.
         return properties;
     }
 
-Além dos parâmetros normais para conexão do consumer na fila como explicitado anteriormente, aplicamos
-também:
+<p>Além dos parâmetros normais para conexão do consumer na fila como explicitado anteriormente, aplicamos
+também:</p>
 * ConsumerConfig.MAX_POLL_RECORDS_CONFIG: a cada poll do tópico o kafka retornará apenas 1 registro.
 
 
 ## Agradecimentos
-Para averiguar o funcionamento basta executar o nosso docker-compose (docker-compose up) e executar os módulo. Lembrando que :
+<p>Para averiguar o funcionamento basta executar o nosso docker-compose (docker-compose up) e executar os módulo. Lembrando que :</p>
 * service-new-order é nosso producer, irá postar mensagens nas filas;
 * service-fraud-detect-service, service-log e service-email são nossos consumidores;
   
-Obrigado por lerem até aqui, terminamos assim nossa primeira parte, a Introdução do Kafka.
+<p>Obrigado por lerem até aqui, terminamos assim nossa primeira parte, a Introdução do Kafka.</p>
 
 
 
