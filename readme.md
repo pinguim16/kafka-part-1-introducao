@@ -159,8 +159,8 @@ começa e onde termina cada bloco de mensagens.*
 
 Existe outras ferramentas similares ao Kafka, como :
 
-ActiveMq;
-RabbitMq;
+* ActiveMq;
+* RabbitMq.
 
 Sendo que cada uma possui as suas características especificas.
 
