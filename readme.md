@@ -60,7 +60,7 @@ onde toda nova informação é adicionada no final do arquivo. Esse é o princí
 * Processamento de stream: processamento imediato de um fluxo de mensagens (data streaming).
 
 <img src="src/main/resources/img/img1.png" alt="kafka" width="400" style="text-align:center;"/> \
-*Pattern publish/subscrive* 
+*Pattern publish/subscribe* 
 
 
 O Kafka é um intermediário que trabalha coletando informações e armazenando para os consumidores.
@@ -275,7 +275,7 @@ também:
 
 
 ## Agradecimentos
-Para averiguar o funcionamento basta executar o nosso docker-compose e executar cada módulo separadamente. /
+Para averiguar o funcionamento basta executar o nosso docker-compose e executar cada módulo separadamente. 
 Obrigado por ler até aqui, terminamos assim nossa primeira parte, a Introdução do Kafka.
 
 
