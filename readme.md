@@ -48,12 +48,12 @@ write-ahead logs, commit logs ou até mesmo transaction logs.</p>
 * Write-ahead Logs (WAL), commit logs ou transaction logs se baseiam numa técnica 
   que fornece atomicidade e durabilidade (propriedades do ACID -
 Atomicidade, Consistência, Isolamento e Durabilidade) num sistema de banco de dados.
-A técnica consiste em gravar todas as informações em num log e depois aplica-las no banco de 
+A técnica consiste em gravar todas as informações em logs e depois aplica-los no banco de 
 dados. Exemplo de um cenário que essa técnica pode ser extremamente útil: 
-  * Se a máquina onde a aplicação está hospedada perde energia ou é desligada no meio de um processo.
-Ao religa-la, essa aplicação precisará de informação se o processo que estava realizando 
-foi concluído com sucesso ou até mesmo continuar de onde parou 
-    e essa informação pode ser obtida através dos logs.
+  * Se a máquina onde a aplicação de um banco de dados está hospedada perde energia ou é desligada no meio de um processo.
+Ao religa-la, essa aplicação precisará de informação do processo que estava realizando, 
+se foi concluído com sucesso ou continuar de onde parou. 
+A aplicação do banco que utliza essa técnica, consultará os logs pra obter essas informações.
 
 *Lembrando que um log é nada menos que uma forma de armazenamento de dado, 
 onde toda nova informação é adicionada no final do arquivo. Esse é o princípio do Kafka.*
