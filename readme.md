@@ -276,6 +276,8 @@ também:
 
 ## Agradecimentos
 Para averiguar o funcionamento basta executar o nosso docker-compose e executar cada módulo separadamente. 
+
+
 Obrigado por ler até aqui, terminamos assim nossa primeira parte, a Introdução do Kafka.
 
 
