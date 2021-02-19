@@ -91,8 +91,8 @@ Utilizado normalmente para combinar dados de diversas fontes gerando um data war
 A mensagem ou evento é composto por:
 - Nome do Tópico: fila ao qual mensagem será postada/gravada;
 - Partição: subdivisão de um tópico, a partição ajuda no balanceamento de carga, entre outras funções.
-- Timestamp: data e hora dos registros, eles são ordenados por ordem de chegada.
-- Chave: utilizada para cenários mais avançados;
+- Timestamp: data e hora dos registros para ordenação fifo.
+- Chave: utilizada para cenários mais avançados, não abordaremos esses cenários por enquanto;
 - Valor: informação que deseja se enviar, normalmente composta por json, xml ou até mesmo uma string.
 
 No kafka, temos as seguintes arquiteturas de mensageiria: 
