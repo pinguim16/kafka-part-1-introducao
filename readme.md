@@ -50,7 +50,7 @@ write-ahead logs, commit logs ou até mesmo transaction logs.</p>
 Atomicidade, Consistência, Isolamento e Durabilidade) num sistema de banco de dados.
 A técnica consiste em gravar todas as informações em logs e depois aplica-los no banco de 
 dados. Exemplo de um cenário que essa técnica pode ser extremamente útil: 
-  * Se a máquina onde a aplicação de um banco de dados está hospedada perde energia ou é desligada no meio de um processo.
+  * Se a máquina onde a aplicação de um banco está perde energia ou é desligada no meio de um processo.
 Ao religa-la, essa aplicação precisará de informação do processo que estava realizando, 
 se foi concluído com sucesso ou continuar de onde parou. 
 A aplicação do banco que utliza essa técnica, consultará os logs pra obter essas informações.
@@ -58,7 +58,7 @@ A aplicação do banco que utliza essa técnica, consultará os logs pra obter e
 *Lembrando que um log é nada menos que uma forma de armazenamento de dado, 
 onde toda nova informação é adicionada no final do arquivo. Esse é o princípio do Kafka.*
 
-## Kafka e suas funcionalidades:
+## Kafka e suas funcionalidades
 
 * Publish/Subscribe — é um pattern que consiste em ter um ou mais publicadores que terá um ou mais
   consumidor/inscrito e as duas pontas trocam mensagens de forma indireta.
@@ -66,7 +66,7 @@ onde toda nova informação é adicionada no final do arquivo. Esse é o princí
 
 
 * Sistema de armazenamento, por padrão as mensagens são armazenadas por 7 dias, mas pode ser alterado
- para armazenar até indefinidamente.
+ para armazenar indefinidamente.
 
 
 * Processamento de stream: processamento imediato de um fluxo de mensagens (data streaming).
