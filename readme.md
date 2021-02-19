@@ -22,14 +22,17 @@ com entrega/captura dos dados para processamento.</p>
 
 ## Data Streaming
 
-Data streaming é um fluxo constante e sem controle de dados, normalmente não se sabe onde
+<p>Data streaming é um fluxo constante e sem controle de dados, normalmente não se sabe onde
 começa e termina o fluxo. Os dados vão sendo processados a medida que chegam no seu consumidor,
-praticamente em tempo real. Mas não quer dizer que essa é apenas a sua única caraterística, 
-os dados também podem ser processados em batch ou lote com hora e data pré-estabelecidas.
-Os dados chegam através de mensagens que são armazenadas permitindo paralelizar 
-o processamento entre aplicações ou apenas processar de forma assíncrona.
-Pode-se usar esse forma de processamento em qualquer ramo para agilizar:
-bancário, imobiliário, industrial e até mesmo para migração de grandes bases de dados.
+praticamente em tempo real.Mas não quer dizer que essa é apenas a sua única caraterística, 
+os dados também podem ser processados em batch ou lote com hora e data pré-estabelecidas.</p>
+<p>Os dados chegam através de mensagens que são armazenadas, permitindo paralelizar 
+o processamento entre aplicações ou apenas processar de forma assíncrona.</p>
+<p>Pode-se usar esse forma de processamento em qualquer ramo para agilizar:</p>
+* Bancário;
+* Imobiliário; 
+* Industrial;
+* E até mesmo para migração de grandes bases de dados.
 
 ## Mas afinal, o que é Kafka?
 
