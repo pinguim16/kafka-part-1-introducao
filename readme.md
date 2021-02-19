@@ -167,9 +167,9 @@ Sendo que cada uma possui as suas características especificas.
 
 # Hands on
 Agora que já apresentamos os principais conceitos do Kafka, vamos por a mão na massa.
-Começando pelo nosso Docker compose que será responsável por subir o nosso cluster.
+Começando pelo nosso docker compose que será responsável por subir o nosso cluster.
 
-Utilizamos as imagens do Confluentinc por serem mais estáveis e confiáveis, abaixo apresentamos a configuração básica do zookeeper:
+Utilizamos as imagens do confluentinc por serem mais estáveis e confiáveis, abaixo apresentamos a configuração básica do zookeeper:
 
        zookeeper:
         image: confluentinc/cp-zookeeper:5.1.2
@@ -181,10 +181,10 @@ Utilizamos as imagens do Confluentinc por serem mais estáveis e confiáveis, ab
         ports:
         - "2181:2181"
 
-* ZOOKEEPER_SERVER_ID: isso é necessário apenas ao executar no modo de cluster, 
-  definindo o ID do servidor. Por exemplo, o id servidor 1 conteria apenas o texto “1“. 
+* ZOOKEEPER_SERVER_ID: necessário apenas para executar no modo de cluster, 
+  definindo o ID do servidor. Por exemplo, o id do servidor 1 conteria apenas o texto “1“. 
   O ID deve ser exclusivo dentro do conjunto e deve ter um valor entre 1 e 255.
-* ZOOKEEPER_CLIENT_PORT : informa a porta ao qual os clientes do Kafka irão escutar.
+* ZOOKEEPER_CLIENT_PORT : informa a porta que os clientes do Kafka irão escutar.
 * ZOOKEEPER_TICK_TIME : unidade de tempo utilizada pelo zookeeper para validações.
 
       kafka1:
@@ -212,20 +212,20 @@ Os brokers comunicam-se entre si, geralmente usando uma rede interna(rede docker
 * KAFKA_ADVERTISED_LISTENERS : lista de listeners com host/ip. São esses os metadados que serão
 devolvidos para clientes.
 * KAFKA_BROKER_ID: identificação do broker kafka.
-* KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: essa configuração define configuração do fator de replicação
-do tópico para segurança caso o broker caia e tenha outro de backup, o consumidor seria direcionado 
-para o backup não havendo perda de mensagens. Nosso caso só utilizamos por ter somente um broker.
+* KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: essa configuração define o fator de replicação
+do tópico para segurança, caso o broker caia e tenha outro de backup, o consumidor seria direcionado 
+para o backup não havendo perda de mensagens. Nosso caso setamos o valor como 1 por ter somente um broker.
 * KAFKA_DELETE_TOPIC_ENABLE: habilita a remoção de tópicos;
-* KAFKA_AUTO_CREATE_TOPICS_ENABLE: habilita a criação de tópicos;
+* KAFKA_AUTO_CREATE_TOPICS_ENABLE: habilita a criação automatica de tópicos;
 
 Para simularmos um ambiente de micro-services de compras geramos vários módulos dentro do projeto, 
-sendo que common-kafka se tornou compartilhado entre todos para termos reutilização de código.
+sendo que common-kafka se tornou compartilhado entre todos para reutilização do código.
 O service-new-order responsável por postar (producer) as mensagens nas filas e os 
 service-fraud-detect-service, service-email e service-log são responsáveis pela leitura das mensagens
 (consumers);
 
 Dentro do commons temos a classe KafkaDispatcher que é nossa classe responsável por conectar no Kafka e 
-enviar as mensagens para fila.
+enviar as mensagens para fila. Abaixo as propriedades que utilizamos para conectar no kafka:
 
       private static Properties properties() {
         var properties = new Properties();
@@ -236,19 +236,19 @@ enviar as mensagens para fila.
     }
 
 
-ProducerConfig.BOOTSTRAP_SERVERS_CONFIG: configuração para conexão da nossa aplicação no java. A porta
+* ProducerConfig.BOOTSTRAP_SERVERS_CONFIG: configuração para conexão da nossa aplicação java no Kafka. A porta
 normalmente é 9092 caso instale diretamente na sua máquina local sem usar containers. Poderíamos 
 mudar o nosso parâmetro de ports que esta sendo externalizadas no docker-compose, mas resolvemos deixar
 como na documentação. 
-ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG: classe responsável por serializar na nossa chave 
+* ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG: classe responsável por serializar nossa chave 
 que está sendo enviada com o objeto da mensagem.
-ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG: classe responsável por serializar o nosso objeto
+* ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG: classe responsável por serializar o nosso objeto
 que está sendo enviado.
 
 No método abaixo send, enviamos o tópico ao qual queremos postar a mensagem, caso o tópico não exista
 já é criado de forma automática. Como o método send do producer precisa de uma chamada de callback para 
 o caso de falha, criamos um básico apenas para enviá-lo como parâmetro e imprimir a excessão para
-investigarmos a causa.
+investigarmos a causa de alguma possível exceção.
   
      void send(String topico, String key, T value) throws ExecutionException, InterruptedException {
         var record = new ProducerRecord<>(topico, key, value);
@@ -280,15 +280,16 @@ enviando os parâmetros necessários para consumo da fila.
         return properties;
     }
 
-Além dos parâmetros normais para conexão do consumer na fila como explicado anteriormente, aplicamos
+Além dos parâmetros normais para conexão do consumer na fila como explicitado anteriormente, aplicamos
 também:
-* ConsumerConfig.MAX_POLL_RECORDS_CONFIG: a cada poll do tópico retornará apenas 1 registro.
+* ConsumerConfig.MAX_POLL_RECORDS_CONFIG: a cada poll do tópico o kafka retornará apenas 1 registro.
 
 
 ## Agradecimentos
-Para averiguar o funcionamento basta executar o nosso docker-compose e executar cada módulo separadamente. 
-
-
+Para averiguar o funcionamento basta executar o nosso docker-compose (docker-compose up) e executar os módulo. Lembrando que :
+* service-new-order é nosso producer, irá postar mensagens nas filas;
+* service-fraud-detect-service, service-log e service-email são nossos consumidores;
+  
 Obrigado por lerem até aqui, terminamos assim nossa primeira parte, a Introdução do Kafka.
 
 
