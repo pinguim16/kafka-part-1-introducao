@@ -169,8 +169,7 @@ Sendo que cada uma possui as suas características especificas.
 Agora que já apresentamos os principais conceitos do Kafka, vamos por a mão na massa.
 Começando pelo nosso Docker compose que será responsável por subir o nosso cluster.
 
-Utilizamos as imagens do Confluentinc por serem mais estáveis e confiáveis, configuração básica do
-zookeeper:
+Utilizamos as imagens do Confluentinc por serem mais estáveis e confiáveis, abaixo apresentamos a configuração básica do zookeeper:
 
        zookeeper:
         image: confluentinc/cp-zookeeper:5.1.2
