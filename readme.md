@@ -40,10 +40,10 @@ o processamento entre aplicações ou apenas processar de forma assíncrona.</p>
 
 <img src="src/main/resources/img/img9.png" alt="Coesão" width="800" style="text-align:center;"/>
 
-O Apache Kafka foi um sistema desenvolvido pelo Linkedin para streaming de dados.
-Originalmente foi criado para ser um sistema baseado em logs e teve até os seguintes nomes:
-write-ahead logs, commit logs ou até mesmo transaction logs. Para ajudar no entendimento dessa
-prática explicitamos abaixo o funcionamento das técnicas:
+<p>O Apache Kafka foi um sistema desenvolvido pelo Linkedin para streaming de dados.</p>
+<p>Originalmente foi criado para ser um sistema baseado em logs e teve até os seguintes nomes:
+write-ahead logs, commit logs ou até mesmo transaction logs.</p> 
+<p>Para auxiliar no entendimento dessa prática, explicitamos abaixo o funcionamento das técnicas:</p>
 
 * Write-ahead Logs (WAL), commit logs ou transaction logs se baseia numa técnica 
   que fornece atomicidade e durabilidade (propriedades do ACID -
