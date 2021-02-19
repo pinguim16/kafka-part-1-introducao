@@ -29,10 +29,12 @@ os dados também podem ser processados em batch ou lote com hora e data pré-est
 <p>Os dados chegam através de mensagens que são armazenadas, permitindo paralelizar 
 o processamento entre aplicações ou apenas processar de forma assíncrona.</p>
 <p>Pode-se usar esse forma de processamento em qualquer ramo para agilizar:</p>
+
 * Bancário;
 * Imobiliário; 
 * Industrial;
 * E até mesmo para migração de grandes bases de dados.
+
 
 ## Mas afinal, o que é Kafka?
 
