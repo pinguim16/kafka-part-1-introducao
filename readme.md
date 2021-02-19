@@ -17,7 +17,8 @@ com entrega/captura dos dados para processamento.</p>
 <p>E a partir dai adentramos no data streaming.</p>
 
 <img src="src/main/resources/img/img8.png" alt="Coesão" width="800" style="text-align:center;"/>
-*Exemplo de comunicação de sistema*
+
+*Exemplo de comunicação de sistema.*
 
 ## Data Streaming
 
