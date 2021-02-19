@@ -287,6 +287,7 @@ também:</p>
 
 ## Agradecimentos
 <p>Para averiguar o funcionamento basta executar o nosso docker-compose (docker-compose up) e executar os módulo. Lembrando que :</p>
+
 * service-new-order é nosso producer, irá postar mensagens nas filas;
 * service-fraud-detect-service, service-log e service-email são nossos consumidores;
   
