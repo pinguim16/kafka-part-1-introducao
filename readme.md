@@ -9,7 +9,7 @@ risco de perder dado por algum bug da aplicação, deploy, entre outros.</p>
 * A operadora precisa se certificar que tenha limite no cartão;
 * Se os dados estão corretos;
 * Se não é fraude;
-* Mais algumas validações. 
+* E Mais algumas validações. 
 
 <p>Nesse exemplo podemos ter várias aplicações (micro-services) com as suas regras de negócio isoladas,
 recebendo estímulos para processar essas informações e não precisam se preocupar 
