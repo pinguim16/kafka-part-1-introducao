@@ -149,7 +149,7 @@ partições, nomes tópicos e os nós disponíveis, além de manter a sincroniza
 
 <img src="src/main/resources/img/img7.png" alt="kafka" width="800" style="text-align:center;"/>
 
-### Acesso Sequencial ao Disco
+#### Acesso Sequencial ao Disco
 *O Kafka trabalha com gravação e leitura sequencial no disco para garantir que não há perda de dados,
 caso aconteça algum desligamento acidental da máquina. Esse acesso permite que o Kafka saiba onde 
 começa e onde termina cada bloco de mensagens.*
