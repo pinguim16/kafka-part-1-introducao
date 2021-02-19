@@ -45,7 +45,7 @@ o processamento entre aplicações ou apenas processar de forma assíncrona.</p>
 write-ahead logs, commit logs ou até mesmo transaction logs.</p> 
 <p>Para auxiliar no entendimento dessa prática, explicitamos abaixo o funcionamento das técnicas:</p>
 
-* Write-ahead Logs (WAL), commit logs ou transaction logs se baseia numa técnica 
+* Write-ahead Logs (WAL), commit logs ou transaction logs se baseiam numa técnica 
   que fornece atomicidade e durabilidade (propriedades do ACID -
 Atomicidade, Consistência, Isolamento e Durabilidade) num sistema de banco de dados.
 A técnica consiste em gravar todas as informações em num log e depois aplica-las no banco de 
