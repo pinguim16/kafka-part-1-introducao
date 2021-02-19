@@ -4,11 +4,11 @@
 Como podemos notar, o volume de dados está crescendo a cada dia e, além disso, não podemos correr o
 risco de perder dado por algum bug da aplicação, deploy, entre outros.</p>
 <p>Imagine a compra de um livro na amazon:</p> 
-* o pagamento é realizado pelo cartão de crédito;
-* a operadora precisa se certificar que tenha limite no cartão;
-* se os dados estão corretos;
-* se não é fraude;
-* mais algumas validações. 
+*  o pagamento é realizado pelo cartão de crédito;
+*  a operadora precisa se certificar que tenha limite no cartão;
+*  se os dados estão corretos;
+*  se não é fraude;
+*  mais algumas validações. 
 
 <p>Nesse exemplo podemos ter várias aplicações (micro-services) com as suas regras de negócio isoladas,
 recebendo estímulos para processar essas informações e não precisam se preocupar 
